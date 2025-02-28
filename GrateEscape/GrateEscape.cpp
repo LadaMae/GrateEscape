@@ -6,6 +6,7 @@
 #include "LogManager.h"
 #include "ResourceManager.h"
 #include "Player.h"
+#include "Mouse.h"
 
 void loadResources(void);
 
@@ -26,6 +27,10 @@ int main()
     loadResources();
 
     new Player;
+
+    for (int i = 0; i < 100; i++) {
+        new Mouse;
+    }
 
     GM.run();
 
