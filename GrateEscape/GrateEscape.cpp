@@ -5,6 +5,7 @@
 #include "GameManager.h"
 #include "LogManager.h"
 #include "ResourceManager.h"
+#include "Player.h"
 
 void loadResources(void);
 
@@ -23,6 +24,8 @@ int main()
     LM.setFlush();
 
     loadResources();
+
+    new Player;
 
     GM.run();
 
