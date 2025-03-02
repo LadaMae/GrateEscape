@@ -7,6 +7,7 @@
 #include "EventView.h"
 
 #include "Player.h"
+#include "Bullet.h"
 
 Player::Player() {
 	setSprite("player");
@@ -19,12 +20,17 @@ Player::Player() {
 	df::Vector p(WM.getBoundary().getHorizontal() / 2, WM.getBoundary().getVertical() / 2);
 	setPosition(p);
 
+	p_reticle = new Reticle();
+	p_reticle->draw();
+
 	move_slowdown = 2;
 	move_countdown = move_slowdown;
+	fire_slowdown = 30;
+	fire_countdown = fire_slowdown;
 }
 
 Player::~Player() {
-	
+	WM.markForDelete(p_reticle);
 }
 
 int Player::eventHandler(const df::Event* p_e) {
@@ -77,9 +83,39 @@ void Player::move(int dx, int dy) {
 
 }
 
+void Player::fire(df::Vector target) {
+	//checks if fire is on time cooldown
+	if (fire_countdown > 0)
+		return;
+	fire_countdown = fire_slowdown;
+
+	// Fire Bullet towards target.
+	// Compute normalized vector to position, then scale by speed (1).
+	df::Vector v = target - getPosition();
+	v.normalize();
+	v.scale(1);
+	Bullet* p = new Bullet(getPosition());
+	p->setVelocity(v);
+
+	// Play "fire" sound.
+	df::Sound* p_sound = RM.getSound("fire");
+	if (p_sound)
+		p_sound->play();
+}
+
 void Player::step() {
 	// Move countdown.
 	move_countdown--;
 	if (move_countdown < 0)
 		move_countdown = 0;
+
+	// Fire countdown.
+	fire_countdown--;
+	if (fire_countdown < 0)
+		fire_countdown = 0;
+	if (fire_countdown == 0)
+	{
+		LM.writeLog("hit fire countdown");
+		fire(p_reticle->getPosition());
+	}
 }

@@ -12,6 +12,7 @@ void loadResources(void);
 
 void loadResources(void) {
     RM.loadSprite("sprites/player-spr.txt", "player");
+    RM.loadSprite("sprites/bullet-spr.txt", "bullet");
 }
 
 int main()
