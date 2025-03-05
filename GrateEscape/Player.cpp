@@ -25,9 +25,17 @@ Player::Player() {
 	p_reticle = new Reticle();
 	p_reticle->draw();
 
+	//variables for player power ups
+	//NOTE: health and atk are stretch goals
+	p_health = 20;
+	p_atk = 5;
+	p_speed = 1.0;
+	p_atkSpeed = 2.0;
+
 	move_slowdown = 2;
 	move_countdown = move_slowdown;
 	fire_slowdown = 30;
+	fire_slowdown = fire_slowdown / p_atkSpeed;
 	fire_countdown = fire_slowdown;
 
 	int current_xp = 0;
@@ -81,7 +89,9 @@ void Player::move(int dx, int dy) {
 	move_countdown = move_slowdown;
 
 	// If stays on window, allow move.
-	df::Vector new_pos(getPosition().getX() + dx, getPosition().getY() + dy);
+	//adjusts speed here
+	// NOTE: adjusts in 0.1 increments
+	df::Vector new_pos(getPosition().getX() + ((float)dx + (dx * p_speed)), getPosition().getY() + ((float)dy + (dy * p_speed)));
 	if ((new_pos.getY() > 3) &&
 		(new_pos.getY() < WM.getBoundary().getVertical()) &&
 		(new_pos.getX() > 3) &&
@@ -149,4 +159,40 @@ void Player::levelUp() {
 	if (p_sound) {
 		p_sound->play();
 	}
+}
+
+
+int Player::getHealth() const {
+	return p_health;
+}
+
+void Player::setHealth(int new_health) {
+	p_health = new_health;
+}
+
+int Player::getAtk() const {
+	return p_atk;
+}
+
+void Player::setAtk(int new_atk) {
+	p_atk = new_atk;
+}
+
+float Player::getSpeed() const {
+	return p_speed;
+}
+
+void Player::setSpeed(float new_speed) {
+	p_speed = new_speed;
+}
+
+float Player::getAtkSpeed() const {
+	return p_atkSpeed;
+}
+
+void Player::setAtkSpeed(float new_atkSpeed) {
+	//adjusts atk speed here
+	//	NOTE: adjusts in 0.1 increments
+	p_atkSpeed = new_atkSpeed;
+	fire_slowdown = fire_slowdown / p_atkSpeed;
 }
