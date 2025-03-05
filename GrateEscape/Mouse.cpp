@@ -153,10 +153,9 @@ void Mouse::hit(const df::EventCollision* p_collision_event) {
 		(p_collision_event->getObject2()->getType() == "Player"))
 	{
 		WM.markForDelete(p_collision_event->getObject1());
-		WM.markForDelete(p_collision_event->getObject2());
+		//WM.markForDelete(p_collision_event->getObject2());
 		//code to decrement player health
-		//ERROR: for some reason erroring when player is deleted?
-		/*df::ObjectList player_list = WM.objectsOfType("Player");
+		df::ObjectList player_list = WM.objectsOfType("Player");
 		df::Object* p_obj = player_list[0];
 		Player* p_player = dynamic_cast <Player*> (p_obj);
 
@@ -165,7 +164,7 @@ void Mouse::hit(const df::EventCollision* p_collision_event) {
 		{
 			WM.markForDelete(p_player);
 			//call game over here
-		}*/
+		}
 	}
 }
 
