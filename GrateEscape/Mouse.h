@@ -12,7 +12,7 @@ public:
 	~Mouse();
 	int eventHandler(const df::Event* p_e) override;
 	void moveToStart();
-	int draw();
+	//int draw();
 
 	// Calculate velocity based on the current position and target position
 	void findNewVelocity(df::Vector target);

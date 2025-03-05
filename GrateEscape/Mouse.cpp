@@ -16,7 +16,7 @@
 Mouse::Mouse() {
 
 	// Set attributes
-	//setSprite("mouse");
+	setSprite("mouse");
 	setType("Mouse");
 	setSpeed(0.06);
 
@@ -132,9 +132,9 @@ df::Vector Mouse::findPlayer() {
 }
 
 // Get rid of this once sprite is ready
-int Mouse::draw() {
+/*int Mouse::draw() {
 	return DM.drawCh(getPosition(), '*', df::Color::WHITE);
-}
+}*/
 
 //when the mouse hits the player, decreases health
 void Mouse::hit(const df::EventCollision* p_collision_event) {
