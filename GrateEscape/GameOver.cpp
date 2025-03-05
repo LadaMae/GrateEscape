@@ -4,6 +4,7 @@
 #include "EventStep.h"
 #include "WorldManager.h"
 #include "GameManager.h"
+#include <LogManager.h>
 
 GameOver::GameOver() {
 	//set type and sprite

@@ -64,7 +64,7 @@ void GameStart::start() {
 	}
 
 	// Spawn some mice to shoot
-	for (int i = 0; i < 16; i++) {
+	for (int i = 0; i < 50; i++) {
 		new Mouse;
 	}
 	new Player;
