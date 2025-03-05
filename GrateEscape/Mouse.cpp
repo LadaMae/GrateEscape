@@ -43,8 +43,16 @@ Mouse::~Mouse(){
 
 int Mouse::eventHandler(const df::Event* p_e) {
 	if (p_e->getType() == df::STEP_EVENT) {
-		findNewVelocity(findPlayer());
-		return 1;
+		if (WM.objectsOfType("Player").getCount() > 0)
+		{
+			findNewVelocity(findPlayer());
+			return 1;
+		}
+		else
+		{
+			return -1;
+		}
+		
 	}
 
 	if (p_e->getType() == df::COLLISION_EVENT) {

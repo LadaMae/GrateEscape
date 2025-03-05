@@ -88,5 +88,6 @@ void GameStart::start() {
 }
 
 void GameStart::playMusic() {
-	p_music->play();
+	if (p_music)
+		p_music->play();
 }
