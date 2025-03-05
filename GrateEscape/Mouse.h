@@ -4,6 +4,8 @@
 #include "Vector.h"
 
 class Mouse : public df::Object {
+private:
+	int m_health;
 
 public:
 	Mouse();
@@ -17,4 +19,9 @@ public:
 
 	// Using the WM, find the player and return their position
 	df::Vector findPlayer();
+
+	void hit(const df::EventCollision* p_collision_event);
+
+	int getHealth();
+	void setHealth(int new_health);
 };

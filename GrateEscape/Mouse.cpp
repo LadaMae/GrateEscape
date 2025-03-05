@@ -23,6 +23,8 @@ Mouse::Mouse() {
 	// Register interest in events
 	registerInterest(df::STEP_EVENT);
 
+	m_health = 10;
+
 	moveToStart();
 }
 
@@ -39,6 +41,13 @@ Mouse::~Mouse(){
 int Mouse::eventHandler(const df::Event* p_e) {
 	if (p_e->getType() == df::STEP_EVENT) {
 		findNewVelocity(findPlayer());
+		return 1;
+	}
+
+	if (p_e->getType() == df::COLLISION_EVENT) {
+		const df::EventCollision* p_collision_event =
+			dynamic_cast <const df::EventCollision*> (p_e);
+		hit(p_collision_event);
 		return 1;
 	}
 
@@ -125,4 +134,36 @@ df::Vector Mouse::findPlayer() {
 // Get rid of this once sprite is ready
 int Mouse::draw() {
 	return DM.drawCh(getPosition(), '*', df::Color::WHITE);
+}
+
+//when the mouse hits the player, decreases health
+void Mouse::hit(const df::EventCollision* p_collision_event) {
+	if ((p_collision_event->getObject1()->getType() == "Player") ||
+		(p_collision_event->getObject2()->getType() == "Player"))
+	{
+		WM.markForDelete(p_collision_event->getObject1());
+		WM.markForDelete(p_collision_event->getObject2());
+		//code to decrement player health
+		//ERROR: for some reason erroring when player is deleted?
+		/*df::ObjectList player_list = WM.objectsOfType("Player");
+		df::Object* p_obj = player_list[0];
+		Player* p_player = dynamic_cast <Player*> (p_obj);
+
+		p_player->setHealth(p_player->getHealth() - 5);
+		if (p_player->getHealth() <= 0)
+		{
+			WM.markForDelete(p_player);
+			//call game over here
+		}*/
+	}
+}
+
+//for health mechanic
+// BACKLOGGED
+int Mouse::getHealth() {
+	return m_health;
+}
+
+void Mouse::setHealth(int new_health) {
+	m_health = new_health;
 }

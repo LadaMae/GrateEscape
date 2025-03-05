@@ -12,9 +12,9 @@ const PowerUps atkPowerUp = PowerUps(1, "atk");
 const PowerUps speedPowerUp = PowerUps(0.1, "speed");
 const PowerUps atkSpeedPowerUp = PowerUps(0.1, "atkSpeed");
 
-const std::array<PowerUps, 4> allPUs = {
+const std::array<PowerUps, 3> allPUs = {
 	healthPowerUp,
-	atkPowerUp,
+	//atkPowerUp,
 	speedPowerUp,
 	atkSpeedPowerUp
 };

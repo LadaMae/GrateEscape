@@ -48,6 +48,7 @@ void Bullet::hit(const df::EventCollision* p_collision_event) {
 	if ((p_collision_event->getObject1()->getType() == "Mouse") ||
 		(p_collision_event->getObject2()->getType() == "Mouse")) {
 		WM.markForDelete(p_collision_event->getObject1());
+		//object 2 is enemy usually
 		WM.markForDelete(p_collision_event->getObject2());
 	}
 }

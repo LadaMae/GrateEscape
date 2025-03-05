@@ -15,6 +15,7 @@ void loadResources(void) {
     RM.loadSprite("sprites/player-spr.txt", "player");
     RM.loadSprite("sprites/bullet-spr.txt", "bullet");
     RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
+    RM.loadSprite("sprites/gameover-spr.txt", "gameover");
 
     RM.loadMusic("sounds/start-music.wav", "start music");
 }

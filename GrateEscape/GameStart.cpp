@@ -7,6 +7,8 @@
 #include "GameStart.h"
 #include "Mouse.h"
 #include "Player.h"
+#include "Speed.h"
+#include "AtkSpeed.h"
 
 GameStart::GameStart() {
 
@@ -65,6 +67,8 @@ void GameStart::start() {
 		new Mouse;
 	}
 	new Player;
+	new Speed;
+	new AtkSpeed;
 
 	// Setup heads-up display
 	//new Points;									// points display
