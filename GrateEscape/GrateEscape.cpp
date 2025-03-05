@@ -7,12 +7,16 @@
 #include "ResourceManager.h"
 #include "Player.h"
 #include "Mouse.h"
+#include "GameStart.h"
 
 void loadResources(void);
 
 void loadResources(void) {
     RM.loadSprite("sprites/player-spr.txt", "player");
     RM.loadSprite("sprites/bullet-spr.txt", "bullet");
+    RM.loadSprite("sprites/gamestart-spr.txt", "gamestart");
+
+    RM.loadMusic("sounds/start-music.wav", "start music");
 }
 
 int main()
@@ -27,11 +31,14 @@ int main()
 
     loadResources();
 
-    new Player;
+    // Spawn GameStart object (will spawn everything else)
+    new GameStart();
 
-    for (int i = 0; i < 100; i++) {
-        new Mouse;
-    }
+    // Load Sounds
+    RM.loadSound("sounds/fire.wav", "fire");
+    RM.loadSound("sounds/level-up.wav", "level up");
+    RM.loadSound("sounds/select.wav", "select");
+    RM.loadSound("sounds/quit.wav", "quit");
 
     GM.run();
 

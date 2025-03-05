@@ -5,6 +5,7 @@
 
 #include "Bullet.h"
 #include "Mouse.h"
+#include "Player.h"
 
 Bullet::Bullet(df::Vector hero_pos) {
 	//set bullet type

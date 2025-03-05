@@ -8,6 +8,7 @@
 
 // Game includes
 #include "Mouse.h"
+#include "Player.h"
 #include <stdio.h>
 #include <random>
 
@@ -28,6 +29,11 @@ Mouse::Mouse() {
 // Destructor
 Mouse::~Mouse(){
 
+	// Add XP to the player
+	df::ObjectList player_list = WM.objectsOfType("Player");
+	df::Object* p_obj = player_list[0];
+	Player* p_player = dynamic_cast <Player*> (p_obj);
+	p_player->addXP(5);
 }
 
 int Mouse::eventHandler(const df::Event* p_e) {

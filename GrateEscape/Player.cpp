@@ -5,6 +5,7 @@
 #include "GameManager.h"
 #include "EventStep.h"
 #include "EventView.h"
+#include "EventPowerUp.h"
 
 #include "Player.h"
 #include "Bullet.h"
@@ -14,6 +15,7 @@ Player::Player() {
 
 	registerInterest(df::KEYBOARD_EVENT);
 	registerInterest(df::STEP_EVENT);
+	registerInterest(POWER_UP_EVENT);
 	
 	setType("Player");
 	
@@ -27,6 +29,8 @@ Player::Player() {
 	move_countdown = move_slowdown;
 	fire_slowdown = 30;
 	fire_countdown = fire_slowdown;
+
+	int current_xp = 0;
 }
 
 Player::~Player() {
@@ -40,9 +44,12 @@ int Player::eventHandler(const df::Event* p_e) {
 		kbd(p_keyboard_event);
 		return 1;
 	}
-
 	if (p_e->getType() == df::STEP_EVENT) {
 		step();
+		return 1;
+	}
+	if (p_e->getType() == POWER_UP_EVENT) {
+		levelUp();
 		return 1;
 	}
 
@@ -117,5 +124,29 @@ void Player::step() {
 	{
 		LM.writeLog("hit fire countdown");
 		fire(p_reticle->getPosition());
+	}
+}
+
+void Player::addXP(int xp) {
+
+	// Add xp
+	current_xp += xp;
+
+	// Check for level up and send event if needed
+	if (current_xp == MAX_XP) {
+		EventPowerUp powerUp;
+		WM.onEvent(&powerUp);
+	}
+}
+
+void Player::levelUp() {
+
+	// Reset xp
+	current_xp = 0;
+
+	// Play "level up" sound
+	df::Sound* p_sound = RM.getSound("level up");
+	if (p_sound) {
+		p_sound->play();
 	}
 }
