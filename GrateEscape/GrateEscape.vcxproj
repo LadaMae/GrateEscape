@@ -151,7 +151,6 @@
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="GameStart.cpp" />
     <ClCompile Include="GrateEscape.cpp" />
-    <ClCompile Include="Health.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PowerUps.cpp" />
@@ -164,7 +163,6 @@
     <ClInclude Include="EventPowerUp.h" />
     <ClInclude Include="GameOver.h" />
     <ClInclude Include="GameStart.h" />
-    <ClInclude Include="Health.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PowerUps.h" />

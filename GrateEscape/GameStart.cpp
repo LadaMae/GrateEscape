@@ -9,7 +9,6 @@
 #include "Player.h"
 #include "Speed.h"
 #include "AtkSpeed.h"
-#include "Health.h"
 
 GameStart::GameStart() {
 
@@ -68,7 +67,6 @@ void GameStart::start() {
 		new Mouse;
 	}
 	new Player;
-	new Health;
 	new Speed;
 	new AtkSpeed;
 
