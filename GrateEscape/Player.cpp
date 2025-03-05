@@ -12,6 +12,7 @@
 #include "Bullet.h"
 #include "Speed.h"
 #include "AtkSpeed.h"
+#include "Health.h"
 
 Player::Player() {
 	setSprite("player");
@@ -34,6 +35,7 @@ Player::Player() {
 	p_atk = 5;
 	p_speed = 0.0;
 	p_atkSpeed = 1.0;
+	atkSpeedIncrement = 1;
 
 	move_slowdown = 2;
 	move_countdown = move_slowdown;
@@ -182,6 +184,8 @@ int Player::getHealth() const {
 
 void Player::setHealth(int new_health) {
 	p_health = new_health;
+	df::EventView ev("Health", p_health, false);
+	WM.onEvent(&ev);
 }
 
 int Player::getAtk() const {
@@ -199,7 +203,9 @@ float Player::getSpeed() const {
 void Player::setSpeed(float new_speed) {
 	p_speed = new_speed;
 	//NOT UPDATING
-	df::EventView ev("Speed", +1, true);
+	int speedIncrement = 1 + (p_speed * 10);
+	df::EventView ev("Speed", speedIncrement, false);
+	WM.onEvent(&ev);
 
 }
 
@@ -212,8 +218,10 @@ void Player::setAtkSpeed(float new_atkSpeed) {
 	//	NOTE: adjusts in 0.1 increments
 	p_atkSpeed = new_atkSpeed;
 	fire_slowdown = fire_slowdown / p_atkSpeed;
+	atkSpeedIncrement++;
 	//UPDATES ATKSPEED HERE
-	df::EventView ev("AtkSpeed", +1, true);
+	df::EventView ev("AtkSpeed", atkSpeedIncrement, false);
+	WM.onEvent(&ev);
 }
 
 PowerUps Player::getRandomPU() {

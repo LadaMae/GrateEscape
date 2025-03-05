@@ -35,6 +35,7 @@ private:
 	int p_atk = 5;
 	float p_speed = 0;
 	float p_atkSpeed = 0;
+	int atkSpeedIncrement = 1;
 
 
 public:

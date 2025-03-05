@@ -16,7 +16,7 @@
 Mouse::Mouse() {
 
 	// Set attributes
-	// setSprite();
+	//setSprite("mouse");
 	setType("Mouse");
 	setSpeed(0.06);
 
