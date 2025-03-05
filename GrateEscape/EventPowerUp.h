@@ -1,5 +1,6 @@
 // Engine includes
 #include "Event.h"
+#include "PowerUps.h"
 
 // Game includes
 #include <string>

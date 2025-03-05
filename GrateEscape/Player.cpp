@@ -29,8 +29,8 @@ Player::Player() {
 	//NOTE: health and atk are stretch goals
 	p_health = 20;
 	p_atk = 5;
-	p_speed = 1.0;
-	p_atkSpeed = 2.0;
+	p_speed = 0.0;
+	p_atkSpeed = 1.0;
 
 	move_slowdown = 2;
 	move_countdown = move_slowdown;
@@ -38,7 +38,7 @@ Player::Player() {
 	fire_slowdown = fire_slowdown / p_atkSpeed;
 	fire_countdown = fire_slowdown;
 
-	int current_xp = 0;
+	current_xp = 0;
 }
 
 Player::~Player() {
@@ -151,6 +151,7 @@ void Player::addXP(int xp) {
 
 void Player::levelUp() {
 
+	LM.writeLog("Leveled up event");
 	// Reset xp
 	current_xp = 0;
 
@@ -159,6 +160,11 @@ void Player::levelUp() {
 	if (p_sound) {
 		p_sound->play();
 	}
+
+	//give player powerup
+	PowerUps chosenPU = getRandomPU();
+	//apply PU
+	applyPU(chosenPU);
 }
 
 
@@ -196,3 +202,41 @@ void Player::setAtkSpeed(float new_atkSpeed) {
 	p_atkSpeed = new_atkSpeed;
 	fire_slowdown = fire_slowdown / p_atkSpeed;
 }
+
+PowerUps Player::getRandomPU() {
+	LM.writeLog("getting random power up");
+	int random_index = std::rand() % allPUs.size();
+
+	// Access the random element using the random index
+	PowerUps random_element = allPUs[random_index];
+	return random_element;
+}
+
+void Player::applyPU(PowerUps powerUp) {
+	float increment = powerUp.getIncrement();
+	std::string type = powerUp.getType();
+	LM.writeLog("Applying new PU: %s, %f", type, increment);
+
+	if (type == "atk")
+	{
+		LM.writeLog("got atk PU");
+		setAtk(p_atk + increment);
+	}
+	else if (type == "health")
+	{
+		LM.writeLog("got health PU");
+		setHealth(p_health + increment);
+	}
+	else if (type == "speed")
+	{
+		LM.writeLog("got speed PU");
+		setSpeed(p_speed + increment);
+	}
+	else if (type == "atkSpeed")
+	{
+		LM.writeLog("got atkSpeed PU");
+		setAtkSpeed(p_atkSpeed + increment);
+	}
+
+}
+

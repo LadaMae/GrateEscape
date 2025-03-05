@@ -2,8 +2,22 @@
 #include "Object.h"
 #include "EventKeyboard.h"
 #include "Reticle.h"
+#include "PowerUps.h"
+#include <array>
 
 #define MAX_XP 10
+
+const PowerUps healthPowerUp = PowerUps(1, "health");
+const PowerUps atkPowerUp = PowerUps(1, "atk");
+const PowerUps speedPowerUp = PowerUps(0.1, "speed");
+const PowerUps atkSpeedPowerUp = PowerUps(0.1, "atkSpeed");
+
+const std::array<PowerUps, 4> allPUs = {
+	healthPowerUp,
+	atkPowerUp,
+	speedPowerUp,
+	atkSpeedPowerUp
+};
 
 class Player : public df::Object {
 private:
@@ -37,4 +51,6 @@ public:
 	void setAtkSpeed(float new_atkSpeed);
 	int eventHandler(const df::Event* p_e) override;
 	void addXP(int xp);
+	PowerUps getRandomPU();
+	void applyPU(PowerUps powerUp);
 };
