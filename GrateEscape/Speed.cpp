@@ -7,7 +7,7 @@ Speed::Speed() {
 	//sets location, string, and color of ui
 	setLocation(df::TOP_RIGHT);
 	setViewString(SPEED_STRING);
-	setColor(df::YELLOW);
+	setColor(df::WHITE);
 
 	setValue(1);
 }

@@ -7,7 +7,7 @@ Health::Health() {
 	//sets location, string, and color of ui
 	setLocation(df::TOP_CENTER);
 	setViewString(HEALTH_STRING);
-	setColor(df::YELLOW);
+	setColor(df::GREEN);
 
 	setValue(20);
 }

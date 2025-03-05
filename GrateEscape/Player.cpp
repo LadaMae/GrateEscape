@@ -162,6 +162,7 @@ void Player::addXP(int xp) {
 void Player::levelUp() {
 
 	LM.writeLog("Leveled up event");
+
 	// Reset xp
 	current_xp = 0;
 
@@ -183,6 +184,8 @@ int Player::getHealth() const {
 }
 
 void Player::setHealth(int new_health) {
+	df::addParticles(df::FIREWORKS, getPosition(), 2, df::GREEN);
+	df::addParticles(df::SPARKS, getPosition(), 1, df::RED);
 	p_health = new_health;
 	df::EventView ev("Health", p_health, false);
 	WM.onEvent(&ev);
@@ -201,8 +204,9 @@ float Player::getSpeed() const {
 }
 
 void Player::setSpeed(float new_speed) {
+	df::addParticles(df::FIREWORKS, getPosition(), 2, df::WHITE);
+	df::addParticles(df::SPARKS, getPosition(), 1, df::RED);
 	p_speed = new_speed;
-	//NOT UPDATING
 	int speedIncrement = 1 + (p_speed * 10);
 	df::EventView ev("Speed", speedIncrement, false);
 	WM.onEvent(&ev);
@@ -216,6 +220,8 @@ float Player::getAtkSpeed() const {
 void Player::setAtkSpeed(float new_atkSpeed) {
 	//adjusts atk speed here
 	//	NOTE: adjusts in 0.1 increments
+	df::addParticles(df::FIREWORKS, getPosition(), 2, df::YELLOW);
+	df::addParticles(df::SPARKS, getPosition(), 1, df::RED);
 	p_atkSpeed = new_atkSpeed;
 	fire_slowdown = fire_slowdown / p_atkSpeed;
 	atkSpeedIncrement++;

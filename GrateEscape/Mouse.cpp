@@ -11,6 +11,7 @@
 #include "Player.h"
 #include <stdio.h>
 #include <random>
+#include <LogManager.h>
 
 // Mouse constructor
 Mouse::Mouse() {
@@ -32,6 +33,8 @@ Mouse::Mouse() {
 Mouse::~Mouse(){
 
 	// Add XP to the player
+	df::addParticles(df::SPARKS, getPosition(), 2, df::WHITE);
+	df::addParticles(df::SPARKS, getPosition(), 1, df::YELLOW);
 	df::ObjectList player_list = WM.objectsOfType("Player");
 	df::Object* p_obj = player_list[0];
 	Player* p_player = dynamic_cast <Player*> (p_obj);
